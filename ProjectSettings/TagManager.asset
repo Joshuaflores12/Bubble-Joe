@@ -7,7 +7,6 @@ TagManager:
   - Ground
   - EnemyJumpDamaged
   - Spike
-  - Enemy
   layers:
   - Default
   - TransparentFX
