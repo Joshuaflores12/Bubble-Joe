@@ -1,9 +1,9 @@
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.Audio;
 using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuActions : MonoBehaviour
 {
@@ -21,8 +21,6 @@ public class MenuActions : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
     }
-
-   
     public void ExitGame()
     {
 #if UNITY_EDITOR
