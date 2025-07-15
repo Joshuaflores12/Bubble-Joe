@@ -25,7 +25,10 @@ public class SettingsMenu : MonoBehaviour
 
     public void CloseSettings()
     {
+        bool isActive = !settingsPanel.activeSelf;
         settingsPanel.SetActive(false);
+       
+        Time.timeScale = isActive ? 0f : 1f;
     }
 
     public void Quit_to_Main_Menu(string SceneName)
