@@ -21,8 +21,6 @@ public class EnemyPatrol : MonoBehaviour
 
     private void Update()
     {
-       
-
         Vector3 target = movingRight ? rightEdge : leftEdge;
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
 
