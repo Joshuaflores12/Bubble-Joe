@@ -13,7 +13,11 @@ public class SettingsMenu : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created  
     void Start()
     {
-      
+      if (Time.timeScale == 0f)
+      {
+            Time.timeScale = 1f;
+      }
+     
     }
 
    
