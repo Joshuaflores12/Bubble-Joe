@@ -3,15 +3,14 @@ using UnityEngine;
 public class PlayerKeybinds : MonoBehaviour
 {
     public GameObject settingsPanel;
-    
+
+   
+
     void Start()
     {
-        if (settingsPanel == null)
-        {
-            settingsPanel = GameObject.Find("Settings_Menu");
-        }
-        if (settingsPanel != null)
-        {
+        settingsPanel = SettingsMenu.settingsPanel;
+        if (settingsPanel != null )
+            {
             settingsPanel.SetActive(false);
         }
 

@@ -6,9 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class SettingsMenu : MonoBehaviour
 {
-    public GameObject settingsPanel;
+    public static GameObject settingsPanel;
     public Slider Volume;
     public AudioMixer mainAudio;
+
+    private void Awake()
+    {
+        settingsPanel = GameObject.Find("Settings_Menu");
+
+    }
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created  
     void Start()
