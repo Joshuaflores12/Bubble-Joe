@@ -3,6 +3,7 @@ using UnityEngine;
 public class SpikeTrap : MonoBehaviour
 {
     [SerializeField] SpawnManager spawnManager;
+    [SerializeField] private Transform Spawn;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -19,8 +20,7 @@ public class SpikeTrap : MonoBehaviour
     {
         if (collision.CompareTag("Player")) 
         {
-            Destroy(collision.gameObject);
-            spawnManager.Respawn();
+            collision.transform.position = Spawn.position;
         }
     }
 }

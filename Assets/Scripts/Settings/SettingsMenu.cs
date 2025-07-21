@@ -45,6 +45,13 @@ public class SettingsMenu : MonoBehaviour
         mainAudio.SetFloat("Volume", Volume.value);
     }
 
+    public void Retry()
+    {
+
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
+    }
+
     public void Exit_to_Desktop()
     {
 #if UNITY_EDITOR
