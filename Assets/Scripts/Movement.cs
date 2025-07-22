@@ -44,7 +44,7 @@ public class Movement : MonoBehaviour
         rb.linearVelocity = movement;
         
     }
-
+    //Ground Checker 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground")) 
@@ -54,6 +54,7 @@ public class Movement : MonoBehaviour
         }
     }
 
+    //Jump damage to enemy 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("EnemyJumpDamaged")) 

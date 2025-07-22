@@ -8,6 +8,8 @@ TagManager:
   - Ground
   - EnemyJumpDamaged
   - HealthBar
+  - Enemy
+  - ShieldBar
   layers:
   - Default
   - TransparentFX

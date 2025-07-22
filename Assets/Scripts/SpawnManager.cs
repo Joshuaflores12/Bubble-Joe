@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 
 public class SpawnManager : MonoBehaviour
@@ -25,10 +25,8 @@ public class SpawnManager : MonoBehaviour
         SpawnPlayer();
     }
 
-    /// Instantiates (or re-instantiates) the player at the current checkpoint.
     private void SpawnPlayer()
     {
-        // Clean up old instance if any
         if (playerInstance != null)
             Destroy(playerInstance);
 
@@ -39,20 +37,25 @@ public class SpawnManager : MonoBehaviour
         );
     }
 
-    /// Call this to respawn the player at the last checkpoint.
     public void Respawn()
     {
         SpawnPlayer();
     }
 
-    /// Switches which Transform will be used on the next spawn/respawn.
-    /// The passed-in transform must be one of those in spawnPoints.
     public void SetCheckpoint(Transform checkpointTransform)
     {
         if (spawnPoints.Contains(checkpointTransform))
         {
             currentSpawnPoint = checkpointTransform;
             Debug.Log($"Checkpoint set to: {checkpointTransform.name}");
+
+            // ✅ Reset shield timer when player steps on checkpoint
+            Player playerScript = playerInstance.GetComponent<Player>();
+            if (playerScript != null)
+            {
+                playerScript.ActivateShield();
+                Debug.Log("Shield timer reset due to checkpoint.");
+            }
         }
         else
         {
