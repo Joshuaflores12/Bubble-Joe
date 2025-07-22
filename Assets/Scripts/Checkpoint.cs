@@ -1,21 +1,41 @@
 using UnityEngine;
- 
+
 public class Checkpoint : MonoBehaviour
 {
     private SpawnManager spawnManager;
 
     private void Awake()
     {
-        // Finds your SpawnManager (same as before)
         spawnManager = Object.FindFirstObjectByType<SpawnManager>();
         if (spawnManager == null)
-            Debug.LogError("Checkpoint2D: No SpawnManager found in scene!");
+        {
+            Debug.LogError("Checkpoint: No SpawnManager found in the scene!");
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Make sure your player has a Rigidbody2D + Collider2D, and is tagged "Player"
         if (other.CompareTag("Player"))
+        {
             spawnManager.SetCheckpoint(transform);
+
+            Player player = other.GetComponent<Player>();
+            if (player != null)
+            {
+                player.isOnCheckpoint = true;
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Player player = other.GetComponent<Player>();
+            if (player != null)
+            {
+                player.isOnCheckpoint = false;
+            }
+        }
     }
 }
