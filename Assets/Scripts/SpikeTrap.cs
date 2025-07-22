@@ -3,7 +3,6 @@ using UnityEngine;
 public class SpikeTrap : MonoBehaviour
 {
     [SerializeField] SpawnManager spawnManager;
-    [SerializeField] private Transform Spawn;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

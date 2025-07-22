@@ -1,4 +1,5 @@
 using UnityEngine;
+
 public class Movement : MonoBehaviour
 {
      [SerializeField]  Rigidbody2D rb;
