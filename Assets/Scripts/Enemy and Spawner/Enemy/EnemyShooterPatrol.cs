@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class EnemyPatrol : MonoBehaviour
+public class EnemyShooterPatrol : MonoBehaviour
 {
     [Tooltip("World-space distance from start to each patrol edge")]
     [SerializeField] private float patrolDistance = 3f;

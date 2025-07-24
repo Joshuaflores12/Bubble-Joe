@@ -105,6 +105,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patrolDistance: 3
   speed: 2
+  projectilePrefab: {fileID: 0}
+  firePoint: {fileID: 0}
 --- !u!50 &6812492931476034436
 Rigidbody2D:
   serializedVersion: 5

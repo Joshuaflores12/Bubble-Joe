@@ -3,10 +3,10 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [Tooltip("The enemy prefab to spawn")]
-    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private GameObject enemyPrefab, enemyShooterPrefab;
 
     [Tooltip("Where the enemy will appear")]
-    [SerializeField] private Transform spawnPoint;
+    [SerializeField] private Transform spawnPoint,enemyShooterSpawnPoint;
 
     /// Call this (e.g. from Start(), or another script) to spawn one enemy.
     public void SpawnEnemy()
@@ -18,6 +18,8 @@ public class EnemySpawner : MonoBehaviour
         }
 
         Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+        Instantiate(enemyShooterPrefab, enemyShooterSpawnPoint.position, enemyShooterSpawnPoint.rotation);
+
     }
 
     // Example: spawn once at start
