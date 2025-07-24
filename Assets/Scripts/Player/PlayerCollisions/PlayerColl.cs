@@ -61,13 +61,26 @@ public class PlayerColl : MonoBehaviour
             Debug.LogWarning("Timer UI (TMP_Text) not found! Make sure it's tagged as 'Timer'");
         }
 
-        ActivateShield();
+        ActivateShield(); // Start with shield
     }
 
     void Update()
     {
-        // Shield logic
-        if (isShieldActive && !isOnCheckpoint)
+        // If shield is not active and player is on checkpoint, recharge it slowly
+        if (!isShieldActive && isOnCheckpoint)
+        {
+            shieldTimeRemaining += Time.deltaTime;
+            if (shieldTimeRemaining >= shieldDuration)
+            {
+                shieldTimeRemaining = shieldDuration;
+                ActivateShield();
+            }
+
+            if (shieldBar != null)
+                shieldBar.SetTime(shieldTimeRemaining);
+        }
+        // If shield is active and not on checkpoint, drain it
+        else if (isShieldActive && !isOnCheckpoint)
         {
             shieldTimeRemaining -= Time.deltaTime;
 
@@ -82,7 +95,7 @@ public class PlayerColl : MonoBehaviour
                 shieldBar.SetTime(shieldTimeRemaining);
         }
 
-        // Countdown logic
+        // Countdown logic - only runs when NOT on checkpoint
         if (isCountdownActive && !isOnCheckpoint)
         {
             countdownRemaining -= Time.deltaTime;
@@ -106,7 +119,7 @@ public class PlayerColl : MonoBehaviour
             }
         }
 
-        // Auto damage logic
+        // Auto damage when both shield and countdown are down
         if (!isShieldActive && !isCountdownActive && !isOnCheckpoint)
         {
             damageTimer += Time.deltaTime;
@@ -117,7 +130,7 @@ public class PlayerColl : MonoBehaviour
                 Debug.Log("Auto damage applied!");
             }
         }
-        else if (isShieldActive || isOnCheckpoint)
+        else
         {
             damageTimer = 0f;
         }
@@ -150,6 +163,7 @@ public class PlayerColl : MonoBehaviour
     public void DeactivateShield()
     {
         isShieldActive = false;
+
         if (forcefield != null)
             forcefield.SetActive(false);
 
