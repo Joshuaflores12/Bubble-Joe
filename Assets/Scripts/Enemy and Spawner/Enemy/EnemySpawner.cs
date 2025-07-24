@@ -3,27 +3,35 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [Tooltip("The enemy prefab to spawn")]
-    [SerializeField] private GameObject enemyPrefab, enemyShooterPrefab;
-
-    [Tooltip("Where the enemy will appear")]
-    [SerializeField] private Transform spawnPoint,enemyShooterSpawnPoint;
-
- [System.Serializable]
+    [System.Serializable]
     public class SpawnField
-
-    public void SpawnEnemy()
     {
+
+
+
         [Tooltip("Where enemies will spawn")]
         public Transform spawnPoint;
 
+
         [Tooltip("Which enemy prefabs can spawn here")]
         public List<GameObject> enemyPrefabs;
+
     }
 
     [Header("Spawn Fields Configuration")]
     [Tooltip("Assign each spawn area Transform and its possible enemies")]
     [SerializeField] private List<SpawnField> spawnFields;
+
+
+
+    [Tooltip("The enemy prefab to spawn")]
+    [SerializeField] private GameObject enemyShooterPrefab;
+
+    [Tooltip("Where the enemy will appear")]
+    [SerializeField] private Transform spawnPoint1,enemyShooterSpawnPoint;
+
+
+   
 
     private void Awake()
     {
@@ -80,9 +88,6 @@ public class EnemySpawner : MonoBehaviour
             Debug.LogWarning($"EnemySpawner: fieldIndex {fieldIndex} out of range.");
             return false;
         }
-
-        Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
-        Instantiate(enemyShooterPrefab, enemyShooterSpawnPoint.position, enemyShooterSpawnPoint.rotation);
 
         var field = spawnFields[fieldIndex];
         if (field.spawnPoint == null || field.enemyPrefabs == null || field.enemyPrefabs.Count == 0)

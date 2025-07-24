@@ -150,6 +150,7 @@ Transform:
   m_Children:
   - {fileID: 360120309}
   - {fileID: 1293393289}
+  - {fileID: 1452975452}
   m_Father: {fileID: 2035252450}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4819827
@@ -14630,6 +14631,12 @@ MonoBehaviour:
   - spawnPoint: {fileID: 1293393289}
     enemyPrefabs:
     - {fileID: 8482292515962624729, guid: 2c5f3dec5b702534f9a0e3b122737dca, type: 3}
+  - spawnPoint: {fileID: 1293393289}
+    enemyPrefabs:
+    - {fileID: 6115311105031770395, guid: c77673608d3e87a47b9597d8da10ceac, type: 3}
+  enemyShooterPrefab: {fileID: 6115311105031770395, guid: c77673608d3e87a47b9597d8da10ceac, type: 3}
+  spawnPoint1: {fileID: 1293393289}
+  enemyShooterSpawnPoint: {fileID: 1452975452}
 --- !u!1 &505733858
 GameObject:
   m_ObjectHideFlags: 0
@@ -18188,7 +18195,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -901.3, y: -272.8}
+  m_AnchoredPosition: {x: -873, y: -272.8}
   m_SizeDelta: {x: 332.0084, y: 36.4247}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2023357173
