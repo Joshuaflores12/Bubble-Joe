@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -3423416894395635019}
   - component: {fileID: -1332048959190472603}
   - component: {fileID: 4246664444226171539}
-  - component: {fileID: 4024946069463212698}
+  - component: {fileID: -6560466703175242890}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -203,10 +203,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  shieldDuration: 5
+  shieldDuration: 60
   forcefield: {fileID: 8020044506455568617}
-  defaultDamage: 5
+  damagePerTick: 5
+  damageInterval: 1
   isOnCheckpoint: 0
+--- !u!114 &-6560466703175242890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6193067068964056334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31ca55daa26304e4286434b140ce6d7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCam: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &8020044506455568617
 GameObject:
   m_ObjectHideFlags: 0
