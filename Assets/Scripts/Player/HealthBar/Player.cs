@@ -10,8 +10,6 @@ public class Player : MonoBehaviour
     public int currentHealth;
     private HealthBar healthBar;
     
- 
-
     [Header("Shield Settings")]
     public float shieldDuration = 5f;
     private float shieldTimeRemaining;
