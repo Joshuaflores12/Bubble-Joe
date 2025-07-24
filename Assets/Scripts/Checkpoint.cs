@@ -22,7 +22,6 @@ public class Checkpoint : MonoBehaviour
             PlayerColl playerColl = other.GetComponent<PlayerColl>();
             if (playerColl != null)
             {
-                playerColl.ActivateShield(); // Refill shield instantly
                 playerColl.isOnCheckpoint = true;
             }
         }
