@@ -203,7 +203,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  currentHealth: 0
   shieldDuration: 60
   forcefield: {fileID: 8020044506455568617}
   damagePerTick: 5
@@ -235,6 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b484d6dc804dad42b1cc807f79b9df1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockbackStrength: 10
 --- !u!1 &8020044506455568617
 GameObject:
   m_ObjectHideFlags: 0
