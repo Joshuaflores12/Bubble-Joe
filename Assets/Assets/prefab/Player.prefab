@@ -197,7 +197,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6193067068964056334}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7217391e3961066449a34f7bd37fc2a5, type: 3}
   m_Name: 
@@ -239,6 +239,7 @@ MonoBehaviour:
   forcefield: {fileID: 8020044506455568617}
   damagePerTick: 1
   damageInterval: 1
+  isOnCheckpoint: 0
   countdownDuration: 120
 --- !u!1 &8020044506455568617
 GameObject:
