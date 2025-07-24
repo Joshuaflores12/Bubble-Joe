@@ -4,6 +4,10 @@ using TMPro;
 
 public class PlayerColl : MonoBehaviour
 {
+
+    [Tooltip("How hard the player is pushed back when hit by an enemy")]
+    [SerializeField] private float knockbackStrength = 5f;
+
     [Header("Shield Settings")]
     public float shieldDuration = 5f;
     private float shieldTimeRemaining;
@@ -197,9 +201,8 @@ public class PlayerColl : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    [Tooltip("How hard the player is pushed back when hit by an enemy")]
-    [SerializeField] private float knockbackStrength = 5f;
+   
+    
 
     private void OnCollisionEnter2D(Collision2D col)
     {
@@ -224,11 +227,6 @@ public class PlayerColl : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (collision.gameObject.CompareTag("EnemyJumpDamaged"))
-        {
-            Destroy(collision.transform.parent.gameObject);
-        }
-        // keeps your "stomp to kill" logic intact
         if (col.CompareTag("EnemyJumpDamaged"))
             Destroy(col.transform.parent.gameObject);
     }
