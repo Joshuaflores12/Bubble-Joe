@@ -202,8 +202,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  shieldDuration: 60
+  shieldDuration: 5
   forcefield: {fileID: 8020044506455568617}
+  defaultDamage: 5
+  isOnCheckpoint: 0
 --- !u!1 &8020044506455568617
 GameObject:
   m_ObjectHideFlags: 0
