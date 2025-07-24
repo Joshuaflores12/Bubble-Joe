@@ -17,11 +17,12 @@ public class PlayerColl : MonoBehaviour
     public float damageInterval = 1.0f;
     private float damageTimer = 0f;
 
-    private bool isOnCheckpoint = false;
+    [Header("Checkpoint State")]
+    [HideInInspector] public bool isOnCheckpoint = false;
 
     [Header("Shield Cooldown Timer")]
     [Tooltip("How long the countdown lasts when the shield is gone (in seconds).")]
-    [SerializeField] private float countdownDuration = 120f; // Editable in Inspector (default 2 minutes)
+    [SerializeField] private float countdownDuration = 120f; // 2 minutes
     private float countdownRemaining;
     private bool isCountdownActive = false;
     private bool hasFlashed = false;
@@ -48,7 +49,7 @@ public class PlayerColl : MonoBehaviour
             countdownCanvas = timerObj.GetComponent<CanvasGroup>();
             if (countdownCanvas == null)
                 countdownCanvas = timerObj.AddComponent<CanvasGroup>();
-            countdownCanvas.alpha = 0f; // Hide initially
+            countdownCanvas.alpha = 0f;
         }
         else
         {
@@ -82,7 +83,6 @@ public class PlayerColl : MonoBehaviour
             countdownRemaining -= Time.deltaTime;
             UpdateCountdownUI();
 
-            // Flash red in last 10 seconds
             if (countdownRemaining <= 10f && !hasFlashed)
             {
                 StartCoroutine(FlashCountdownText());
@@ -132,7 +132,6 @@ public class PlayerColl : MonoBehaviour
             shieldBar.SetTime(shieldDuration);
         }
 
-        // Reset timer
         isCountdownActive = false;
         countdownRemaining = countdownDuration;
         hasFlashed = false;
