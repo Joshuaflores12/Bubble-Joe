@@ -13242,7 +13242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d93c52b5f7954d84ea5047a9804588ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Volume: {fileID: 0}
+  Volume: {fileID: 25911347}
   mainAudio: {fileID: 24100000, guid: 29652ccaac47e1948a4f3eba7e1750fd, type: 2}
 --- !u!4 &24400456
 Transform:

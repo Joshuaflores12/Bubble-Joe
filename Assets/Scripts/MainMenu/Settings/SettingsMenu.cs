@@ -54,9 +54,10 @@ public class SettingsMenu : MonoBehaviour
 
     public void Retry()
     {
-
+        Time.timeScale = 1f;   
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
+        HealthManagerLivesSystem.health = 3; 
     }
 
     public void Exit_to_Desktop()
