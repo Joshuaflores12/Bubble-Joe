@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
      [SerializeField]  Vector2 movement;
      [SerializeField]  bool isGrounded;
      [SerializeField]  float jumpDamage;
+   
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -27,21 +28,20 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()  
     {
+        bool goLeft = Input.GetKey(KeyCode.A);
+        bool goRight = Input.GetKey(KeyCode.D);
         float Xmovement = Input.GetAxis("Horizontal");
 
         movement = new Vector2 (Xmovement, 0);
 
-        if (Xmovement != 0) 
+        if (goLeft && goRight)
         {
-            movement = new Vector2(Xmovement * movementSpeed, rb.linearVelocity.y);
+            Xmovement = 0f; 
         }
-
-        else 
-        {
-            movement = new Vector2(0, rb.linearVelocity.y);
-        }
-
+        movement = new Vector2(Xmovement * movementSpeed, rb.linearVelocity.y);
         rb.linearVelocity = movement;
+
+
         
     }
     //Ground Checker 

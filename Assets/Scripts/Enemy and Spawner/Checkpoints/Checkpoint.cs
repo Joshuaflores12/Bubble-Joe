@@ -19,10 +19,10 @@ public class Checkpoint : MonoBehaviour
         {
             spawnManager.SetCheckpoint(transform);
 
-            Player player = other.GetComponent<Player>();
-            if (player != null)
+            PlayerColl playerColl = other.GetComponent<PlayerColl>();
+            if (playerColl != null)
             {
-                player.isOnCheckpoint = true;
+                playerColl.isOnCheckpoint = true;
             }
         }
     }
@@ -31,10 +31,10 @@ public class Checkpoint : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Player player = other.GetComponent<Player>();
-            if (player != null)
+            PlayerColl playerColl = other.GetComponent<PlayerColl>();
+            if (playerColl != null)
             {
-                player.isOnCheckpoint = false;
+                playerColl.isOnCheckpoint = false;
             }
         }
     }

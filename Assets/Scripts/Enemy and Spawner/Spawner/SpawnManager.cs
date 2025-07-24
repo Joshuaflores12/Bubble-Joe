@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class SpawnManager : MonoBehaviour
 {
-    [Tooltip("Drag in all your checkpoint Transforms here (in order or arbitrary).")]
+    [Tooltip("Drag in all your checkpoint Transforms here.")]
     [SerializeField] private List<Transform> spawnPoints = new List<Transform>();
 
     [Tooltip("Your player prefab.")]
@@ -20,7 +20,6 @@ public class SpawnManager : MonoBehaviour
             return;
         }
 
-        // Default to first one
         currentSpawnPoint = spawnPoints[0];
         SpawnPlayer();
     }
@@ -48,14 +47,6 @@ public class SpawnManager : MonoBehaviour
         {
             currentSpawnPoint = checkpointTransform;
             Debug.Log($"Checkpoint set to: {checkpointTransform.name}");
-
-            // ✅ Reset shield timer when player steps on checkpoint
-            Player playerScript = playerInstance.GetComponent<Player>();
-            if (playerScript != null)
-            {
-                playerScript.ActivateShield();
-                Debug.Log("Shield timer reset due to checkpoint.");
-            }
         }
         else
         {
