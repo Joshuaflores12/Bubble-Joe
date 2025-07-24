@@ -211,17 +211,5 @@ public class PlayerColl : MonoBehaviour
         {
             Destroy(collision.transform.parent.gameObject);
         }
-        else if (collision.CompareTag("Checkpoint"))
-        {
-            isOnCheckpoint = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Checkpoint"))
-        {
-            isOnCheckpoint = false;
-        }
     }
 }

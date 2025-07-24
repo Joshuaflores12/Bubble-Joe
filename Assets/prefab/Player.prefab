@@ -239,6 +239,7 @@ MonoBehaviour:
   forcefield: {fileID: 8020044506455568617}
   damagePerTick: 1
   damageInterval: 1
+  isOnCheckpoint: 0
   countdownDuration: 120
 --- !u!1 &8020044506455568617
 GameObject:
