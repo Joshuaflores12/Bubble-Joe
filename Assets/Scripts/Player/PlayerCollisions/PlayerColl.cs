@@ -43,6 +43,8 @@ public class PlayerColl : MonoBehaviour
     private HealthManagerLivesSystem healthManager;
     private int maxHealth;
 
+    private bool healthResetOnCheckpoint = false;
+
     void Start()
     {
         // Locate ShieldBar by tag
@@ -79,16 +81,15 @@ public class PlayerColl : MonoBehaviour
 
     void Update()
     {
-        // Reset health to max when on checkpoint
-        if (isOnCheckpoint && HealthManagerLivesSystem.health < maxHealth)
+        if (isOnCheckpoint && !healthResetOnCheckpoint)
         {
             HealthManagerLivesSystem.health = maxHealth;
+            healthResetOnCheckpoint = true;
+            SetShieldToFraction(0.5f);
         }
-
-        // If shield is not active and player is on checkpoint, recharge it to half
-        if (!isShieldActive && isOnCheckpoint)
+        else if (!isOnCheckpoint)
         {
-           SetShieldToFraction(0.5f); 
+            healthResetOnCheckpoint = false;
         }
 
         if (isShieldActive && isOnCheckpoint)
@@ -202,6 +203,32 @@ public class PlayerColl : MonoBehaviour
             shieldBar.SetTime(0f);
 
         Debug.Log("Shield deactivated!");
+    }
+
+    public void SetShieldToFraction(float fraction)
+    {
+        shieldTimeRemaining = Mathf.Clamp(shieldDuration * fraction, 0f, shieldDuration);
+        isShieldActive = true;
+
+        if (forcefield != null)
+            forcefield.SetActive(true);
+
+        if (shieldBar != null)
+        {
+            shieldBar.SetMaxTime(shieldDuration);
+            shieldBar.SetTime(shieldTimeRemaining);
+        }
+
+        isCountdownActive = false;
+        hasFlashed = false;
+
+        if (countdownCanvas != null)
+            countdownCanvas.alpha = 0f;
+
+        shieldDrainDelayTimer = shieldDrainDelay;
+        ShieldDrain = true;
+
+        Debug.Log($"Shield set to {fraction * 100}% and activated!");
     }
 
     private void StartCountdown()
