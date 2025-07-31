@@ -1,16 +1,23 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class HealthManagerLivesSystem : MonoBehaviour
 {
-    public static int health = 3;
+    public static int health = 3; // Hearts per life
+    public static int lives = 3;  // Total lives
 
     [SerializeField] private Image[] hearts;
     [SerializeField] private Sprite fullHeart;
     [SerializeField] private Sprite emptyHeart;
+    [SerializeField] private TMP_Text Lives; 
 
-    // ensure we only show GameOver once
     private bool _gameOverTriggered = false;
+
+    void Start()
+    {
+        UpdateLivesUI();
+    }
 
     void Update()
     {
@@ -18,8 +25,18 @@ public class HealthManagerLivesSystem : MonoBehaviour
         for (int i = 0; i < hearts.Length; i++)
             hearts[i].sprite = i < health ? fullHeart : emptyHeart;
 
+        // ————— Update lives UI —————
+        UpdateLivesUI();
+
+        // ————— Check for heart depletion —————
+        if (health <= 0 && lives > 1)
+        {
+            lives--;
+            health = hearts.Length; // Reset hearts for the next life
+        }
+
         // ————— Check for Game Over —————
-        if (!_gameOverTriggered && health <= 0)
+        if (!_gameOverTriggered && health <= 0 && lives <= 1)
         {
             _gameOverTriggered = true;
 
@@ -37,5 +54,11 @@ public class HealthManagerLivesSystem : MonoBehaviour
             var pc = FindFirstObjectByType<PlayerColl>();
             if (pc != null) pc.enabled = false;
         }
+    }
+
+    private void UpdateLivesUI()
+    {
+        if (Lives != null)
+            Lives.text =  lives.ToString();
     }
 }
