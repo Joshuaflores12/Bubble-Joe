@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class ShieldBar : MonoBehaviour
 {
+    
     public Slider slider;
     public Gradient gradient;
     public Image fill;
@@ -19,4 +20,9 @@ public class ShieldBar : MonoBehaviour
         slider.value = time;
         fill.color = gradient.Evaluate(slider.normalizedValue);
     }
+
+    public bool IsEmpty()
+    {
+        return slider.value <= 0;
+    }   
 }

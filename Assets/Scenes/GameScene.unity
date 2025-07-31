@@ -16558,7 +16558,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -196901517, guid: 74f47e660fa729e46b671b0c64e081af, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -18314,7 +18314,7 @@ GameObject:
   - component: {fileID: 2010858116}
   - component: {fileID: 2010858121}
   m_Layer: 0
-  m_Name: 'Boss testing '
+  m_Name: Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18442,14 +18442,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2010858115}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.37866, y: -15.85, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 43.68306, y: -7.45166, z: 0}
   m_LocalScale: {x: 7.7131352, y: 7.7131352, z: 7.7131352}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2078357239}
   - {fileID: 1910693281}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2035252450}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &2010858121
 CircleCollider2D:
@@ -18653,6 +18653,7 @@ Transform:
   m_Children:
   - {fileID: 2031463}
   - {fileID: 473033727}
+  - {fileID: 2010858120}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2078357238
@@ -18825,4 +18826,3 @@ SceneRoots:
   - {fileID: 518361429}
   - {fileID: 2035252450}
   - {fileID: 47411769}
-  - {fileID: 2010858120}
