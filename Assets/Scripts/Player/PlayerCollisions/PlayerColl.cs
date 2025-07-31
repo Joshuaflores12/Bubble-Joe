@@ -215,16 +215,12 @@ public class PlayerColl : MonoBehaviour
         }
     }
 
-   
-    
-
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (!col.gameObject.CompareTag("Enemy"))
             return;
 
-        // 1) Subtract one life
-        HealthManagerLivesSystem.health--;
+        
 
         // 2) Apply knock-back impulse
         var rb = GetComponent<Rigidbody2D>();

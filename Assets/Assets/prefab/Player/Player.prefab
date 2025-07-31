@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -1332048959190472603}
   - component: {fileID: -6560466703175242890}
   - component: {fileID: -1987837665931993468}
+  - component: {fileID: -1195588664639109325}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -222,6 +223,19 @@ MonoBehaviour:
   damageInterval: 1
   isOnCheckpoint: 0
   countdownDuration: 120
+--- !u!114 &-1195588664639109325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6193067068964056334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 354db96538de80b4ca4a3c22b926d6fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: -9022803459307738961}
 --- !u!1 &8020044506455568617
 GameObject:
   m_ObjectHideFlags: 0

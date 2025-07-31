@@ -11,6 +11,9 @@ TagManager:
   - Enemy
   - ShieldBar
   - Timer
+  - Double Layer Bubble
+  - Bubble-Fy
+  - Projectile
   layers:
   - Default
   - TransparentFX
