@@ -105,8 +105,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patrolDistance: 3
   speed: 2
-  projectilePrefab: {fileID: 0}
-  firePoint: {fileID: 0}
 --- !u!50 &6812492931476034436
 Rigidbody2D:
   serializedVersion: 5
@@ -168,7 +166,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0007829666, y: 0.038362503}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -178,7 +176,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.8355856, y: 0.68839645}
   m_EdgeRadius: 0
 --- !u!1 &8895919256807369524
 GameObject:
@@ -206,7 +204,7 @@ Transform:
   m_GameObject: {fileID: 8895919256807369524}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.07588005, y: 0.6295, z: 0}
+  m_LocalPosition: {x: 0.115, y: 0.524, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

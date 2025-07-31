@@ -217,12 +217,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knockbackStrength: 10
-  shieldDuration: 5
+  shieldDuration: 120
   forcefield: {fileID: 0}
   damagePerTick: 5
   damageInterval: 1
   isOnCheckpoint: 0
   countdownDuration: 120
+  shieldDrainDelay: 3.5
 --- !u!114 &-1195588664639109325
 MonoBehaviour:
   m_ObjectHideFlags: 0
