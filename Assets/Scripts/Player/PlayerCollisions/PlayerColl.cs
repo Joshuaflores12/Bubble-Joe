@@ -85,18 +85,32 @@ public class PlayerColl : MonoBehaviour
         {
             HealthManagerLivesSystem.health = maxHealth;
             healthResetOnCheckpoint = true;
-            SetShieldToFraction(0.5f);
+
+            if (shieldTimeRemaining <= 0f)
+            {
+                // If empty, refill to 50%
+                shieldTimeRemaining = shieldDuration * 0.5f;
+            }
+            else if (shieldTimeRemaining < shieldDuration)
+            {
+                // Add 50% if not already full
+                shieldTimeRemaining = Mathf.Clamp(shieldTimeRemaining + (shieldDuration * 0.5f), 0f, shieldDuration);
+            }
+
+            ActivateShield(false); // Don't override shieldTimeRemaining
+            if (shieldBar != null)
+            {
+                shieldBar.SetMaxTime(shieldDuration);
+                shieldBar.SetTime(shieldTimeRemaining);
+            }
+
+            Debug.Log($"Shield refilled on checkpoint. Current: {shieldTimeRemaining}/{shieldDuration}");
         }
         else if (!isOnCheckpoint)
         {
             healthResetOnCheckpoint = false;
         }
 
-        if (isShieldActive && isOnCheckpoint)
-        {
-
-          SetShieldToFraction(0.5f); 
-        }
         // As long as there is a shield, it will drain over time after a delay
         else if (isShieldActive && !isOnCheckpoint)
         {
@@ -168,6 +182,7 @@ public class PlayerColl : MonoBehaviour
     public void ActivateShield(bool fullRefill)
     {
         isShieldActive = true;
+
         if (fullRefill)
             shieldTimeRemaining = shieldDuration;
 
@@ -191,6 +206,7 @@ public class PlayerColl : MonoBehaviour
 
         Debug.Log("Shield activated!");
     }
+
 
     public void DeactivateShield()
     {
@@ -254,7 +270,7 @@ public class PlayerColl : MonoBehaviour
                 int minutes = Mathf.FloorToInt(countdownRemaining / 60f);
                 int seconds = Mathf.FloorToInt(countdownRemaining % 60f);
                 countdownText.text = $"Timer : {minutes:00}:{seconds:00}";
-            }  
+            }
         }
     }
 
@@ -281,7 +297,7 @@ public class PlayerColl : MonoBehaviour
         if (!col.gameObject.CompareTag("Enemy"))
             return;
 
-        
+
 
         // 2) Apply knock-back impulse
         var rb = GetComponent<Rigidbody2D>();
@@ -301,5 +317,32 @@ public class PlayerColl : MonoBehaviour
         if (col.CompareTag("EnemyJumpDamaged"))
             Destroy(col.transform.parent.gameObject);
     }
+
+    private void RefillShieldOnCheckpoint()
+    {
+        float halfShield = shieldDuration * 0.5f;
+
+        if (shieldTimeRemaining <= 0f)
+        {
+            // If empty, refill to 50%
+            shieldTimeRemaining = halfShield;
+        }
+        else
+        {
+            // If not empty, add half (but don't exceed max)
+            shieldTimeRemaining = Mathf.Clamp(shieldTimeRemaining + halfShield, 0f, shieldDuration);
+        }
+
+        ActivateShield(false); // Don't set shieldTimeRemaining again in there
+
+        if (shieldBar != null)
+        {
+            shieldBar.SetMaxTime(shieldDuration);
+            shieldBar.SetTime(shieldTimeRemaining);
+        }
+
+        Debug.Log($"Shield refilled. Current: {shieldTimeRemaining}/{shieldDuration}");
+    }
+
 }
 

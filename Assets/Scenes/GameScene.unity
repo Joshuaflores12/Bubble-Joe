@@ -10509,6 +10509,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Bubble-Fy
       objectReference: {fileID: 0}
+    - target: {fileID: 2477518719631994512, guid: 13bd89740ac586e42b14c796d7f9df4d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5099110173326813386, guid: 13bd89740ac586e42b14c796d7f9df4d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -56.51
