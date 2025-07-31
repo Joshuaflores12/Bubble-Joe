@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -6560466703175242890}
   - component: {fileID: -1987837665931993468}
   - component: {fileID: -1195588664639109325}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -223,6 +223,7 @@ MonoBehaviour:
   damageInterval: 1
   isOnCheckpoint: 0
   countdownDuration: 120
+  shieldDrainDelay: 3.5
 --- !u!114 &-1195588664639109325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,7 +248,7 @@ GameObject:
   - component: {fileID: 5655287449404666328}
   - component: {fileID: 7847088731419041005}
   - component: {fileID: 9039058576204767954}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BubbleForceField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
