@@ -80,36 +80,17 @@ public class PlayerColl : MonoBehaviour
     }
 
     void Update()
-    {
+        {
         if (isOnCheckpoint && !healthResetOnCheckpoint)
         {
             HealthManagerLivesSystem.health = maxHealth;
             healthResetOnCheckpoint = true;
-
-            if (shieldTimeRemaining <= 0f)
-            {
-                // If empty, refill to 50%
-                shieldTimeRemaining = shieldDuration * 0.5f;
-            }
-            else if (shieldTimeRemaining < shieldDuration)
-            {
-                // Add 50% if not already full
-                shieldTimeRemaining = Mathf.Clamp(shieldTimeRemaining + (shieldDuration * 0.5f), 0f, shieldDuration);
-            }
-
-            ActivateShield(false); // Don't override shieldTimeRemaining
-            if (shieldBar != null)
-            {
-                shieldBar.SetMaxTime(shieldDuration);
-                shieldBar.SetTime(shieldTimeRemaining);
-            }
-
-            Debug.Log($"Shield refilled on checkpoint. Current: {shieldTimeRemaining}/{shieldDuration}");
+            RefillShieldOnCheckpoint();
         }
-        else if (!isOnCheckpoint)
-        {
-            healthResetOnCheckpoint = false;
-        }
+
+        
+
+
 
         // As long as there is a shield, it will drain over time after a delay
         else if (isShieldActive && !isOnCheckpoint)
@@ -345,4 +326,3 @@ public class PlayerColl : MonoBehaviour
     }
 
 }
-
