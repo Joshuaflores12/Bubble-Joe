@@ -36,6 +36,15 @@ public class PlayerColl : MonoBehaviour
     private TMP_Text countdownText;
     private CanvasGroup countdownCanvas;
 
+    [SerializeField] private float shieldDrainDelay = 3.5f;
+    private float shieldDrainDelayTimer = 0f;
+    private bool ShieldDrain = false;
+
+    private HealthManagerLivesSystem healthManager;
+    private int maxHealth;
+
+    private bool healthResetOnCheckpoint = false;
+
     void Start()
     {
         // Locate ShieldBar by tag
@@ -61,41 +70,75 @@ public class PlayerColl : MonoBehaviour
             Debug.LogWarning("Timer UI (TMP_Text) not found! Make sure it's tagged as 'Timer'");
         }
 
-        ActivateShield(); // Start with shield
+        // Cache health manager and max health
+        healthManager = FindFirstObjectByType<HealthManagerLivesSystem>();
+        if (healthManager != null)
+            maxHealth = healthManager.hearts.Length;
+
+        countdownRemaining = countdownDuration;
+        ActivateShield(true); // Start with shield
     }
 
     void Update()
     {
-        // If shield is not active and player is on checkpoint, recharge it slowly
-        if (!isShieldActive && isOnCheckpoint)
+        if (isOnCheckpoint && !healthResetOnCheckpoint)
         {
-            shieldTimeRemaining += Time.deltaTime;
-            if (shieldTimeRemaining >= shieldDuration)
-            {
-                shieldTimeRemaining = shieldDuration;
-                ActivateShield();
-            }
-
-            if (shieldBar != null)
-                shieldBar.SetTime(shieldTimeRemaining);
-        }
-        // If shield is active and not on checkpoint, drain it
-        else if (isShieldActive && !isOnCheckpoint)
-        {
-            shieldTimeRemaining -= Time.deltaTime;
+            HealthManagerLivesSystem.health = maxHealth;
+            healthResetOnCheckpoint = true;
 
             if (shieldTimeRemaining <= 0f)
             {
-                shieldTimeRemaining = 0f;
-                DeactivateShield();
-                StartCountdown();
+                // If empty, refill to 50%
+                shieldTimeRemaining = shieldDuration * 0.5f;
+            }
+            else if (shieldTimeRemaining < shieldDuration)
+            {
+                // Add 50% if not already full
+                shieldTimeRemaining = Mathf.Clamp(shieldTimeRemaining + (shieldDuration * 0.5f), 0f, shieldDuration);
+            }
+
+            ActivateShield(false); // Don't override shieldTimeRemaining
+            if (shieldBar != null)
+            {
+                shieldBar.SetMaxTime(shieldDuration);
+                shieldBar.SetTime(shieldTimeRemaining);
+            }
+
+            Debug.Log($"Shield refilled on checkpoint. Current: {shieldTimeRemaining}/{shieldDuration}");
+        }
+        else if (!isOnCheckpoint)
+        {
+            healthResetOnCheckpoint = false;
+        }
+
+        // As long as there is a shield, it will drain over time after a delay
+        else if (isShieldActive && !isOnCheckpoint)
+        {
+            if (ShieldDrain)
+            {
+                shieldDrainDelayTimer -= Time.deltaTime;
+                if (shieldDrainDelayTimer <= 0f)
+                {
+                    ShieldDrain = false;
+                }
+            }
+            else
+            {
+                shieldTimeRemaining -= Time.deltaTime;
+
+                if (shieldTimeRemaining <= 0f)
+                {
+                    shieldTimeRemaining = 0f;
+                    DeactivateShield();
+                    StartCountdown();
+                }
             }
 
             if (shieldBar != null)
                 shieldBar.SetTime(shieldTimeRemaining);
         }
 
-        // Countdown logic - only runs when NOT on checkpoint
+        // Timer countdown that when reaches zero, damages the player
         if (isCountdownActive && !isOnCheckpoint)
         {
             countdownRemaining -= Time.deltaTime;
@@ -119,7 +162,7 @@ public class PlayerColl : MonoBehaviour
             }
         }
 
-        // Auto damage when both shield and countdown are down
+        // Damage happens when the shield is down and timer is zero
         if (!isShieldActive && !isCountdownActive && !isOnCheckpoint)
         {
             damageTimer += Time.deltaTime;
@@ -136,10 +179,12 @@ public class PlayerColl : MonoBehaviour
         }
     }
 
-    public void ActivateShield()
+    public void ActivateShield(bool fullRefill)
     {
         isShieldActive = true;
-        shieldTimeRemaining = shieldDuration;
+
+        if (fullRefill)
+            shieldTimeRemaining = shieldDuration;
 
         if (forcefield != null)
             forcefield.SetActive(true);
@@ -147,18 +192,21 @@ public class PlayerColl : MonoBehaviour
         if (shieldBar != null)
         {
             shieldBar.SetMaxTime(shieldDuration);
-            shieldBar.SetTime(shieldDuration);
+            shieldBar.SetTime(shieldTimeRemaining);
         }
 
         isCountdownActive = false;
-        countdownRemaining = countdownDuration;
         hasFlashed = false;
 
         if (countdownCanvas != null)
             countdownCanvas.alpha = 0f;
 
+        shieldDrainDelayTimer = shieldDrainDelay;
+        ShieldDrain = true;
+
         Debug.Log("Shield activated!");
     }
+
 
     public void DeactivateShield()
     {
@@ -173,10 +221,35 @@ public class PlayerColl : MonoBehaviour
         Debug.Log("Shield deactivated!");
     }
 
+    public void SetShieldToFraction(float fraction)
+    {
+        shieldTimeRemaining = Mathf.Clamp(shieldDuration * fraction, 0f, shieldDuration);
+        isShieldActive = true;
+
+        if (forcefield != null)
+            forcefield.SetActive(true);
+
+        if (shieldBar != null)
+        {
+            shieldBar.SetMaxTime(shieldDuration);
+            shieldBar.SetTime(shieldTimeRemaining);
+        }
+
+        isCountdownActive = false;
+        hasFlashed = false;
+
+        if (countdownCanvas != null)
+            countdownCanvas.alpha = 0f;
+
+        shieldDrainDelayTimer = shieldDrainDelay;
+        ShieldDrain = true;
+
+        Debug.Log($"Shield set to {fraction * 100}% and activated!");
+    }
+
     private void StartCountdown()
     {
         isCountdownActive = true;
-        countdownRemaining = countdownDuration;
         hasFlashed = false;
 
         if (countdownCanvas != null)
@@ -188,12 +261,16 @@ public class PlayerColl : MonoBehaviour
 
     private void UpdateCountdownUI()
     {
-        if (countdownText != null)
+        if (countdownText != null && shieldBar != null)
         {
-            int minutes = Mathf.FloorToInt(countdownRemaining / 60f);
-            int seconds = Mathf.FloorToInt(countdownRemaining % 60f);
-            countdownText.text = $"Timer : {minutes:00}:{seconds:00}";
-            countdownText.color = Color.white;
+            countdownText.enabled = shieldBar.IsEmpty();
+
+            if (shieldBar.IsEmpty())
+            {
+                int minutes = Mathf.FloorToInt(countdownRemaining / 60f);
+                int seconds = Mathf.FloorToInt(countdownRemaining % 60f);
+                countdownText.text = $"Timer : {minutes:00}:{seconds:00}";
+            }
         }
     }
 
@@ -215,16 +292,12 @@ public class PlayerColl : MonoBehaviour
         }
     }
 
-   
-    
-
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (!col.gameObject.CompareTag("Enemy"))
             return;
 
-        // 1) Subtract one life
-        HealthManagerLivesSystem.health--;
+
 
         // 2) Apply knock-back impulse
         var rb = GetComponent<Rigidbody2D>();
@@ -244,5 +317,32 @@ public class PlayerColl : MonoBehaviour
         if (col.CompareTag("EnemyJumpDamaged"))
             Destroy(col.transform.parent.gameObject);
     }
+
+    private void RefillShieldOnCheckpoint()
+    {
+        float halfShield = shieldDuration * 0.5f;
+
+        if (shieldTimeRemaining <= 0f)
+        {
+            // If empty, refill to 50%
+            shieldTimeRemaining = halfShield;
+        }
+        else
+        {
+            // If not empty, add half (but don't exceed max)
+            shieldTimeRemaining = Mathf.Clamp(shieldTimeRemaining + halfShield, 0f, shieldDuration);
+        }
+
+        ActivateShield(false); // Don't set shieldTimeRemaining again in there
+
+        if (shieldBar != null)
+        {
+            shieldBar.SetMaxTime(shieldDuration);
+            shieldBar.SetTime(shieldTimeRemaining);
+        }
+
+        Debug.Log($"Shield refilled. Current: {shieldTimeRemaining}/{shieldDuration}");
+    }
+
 }
 
