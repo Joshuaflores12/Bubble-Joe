@@ -219,9 +219,6 @@ public class PlayerColl : MonoBehaviour
     {
         if (!col.gameObject.CompareTag("Enemy"))
             return;
-
-        
-
         // 2) Apply knock-back impulse
         var rb = GetComponent<Rigidbody2D>();
         if (rb != null)

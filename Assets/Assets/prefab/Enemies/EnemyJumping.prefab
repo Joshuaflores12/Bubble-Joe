@@ -88,9 +88,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1268295235569272296}
   - component: {fileID: 5068321201652154246}
-  - component: {fileID: 9139967244966950911}
   - component: {fileID: 7677963455301352269}
-  - component: {fileID: 8953361252570886375}
+  - component: {fileID: 3734036315246324324}
+  - component: {fileID: 8170093829001122910}
   m_Layer: 0
   m_Name: EnemyJumping
   m_TagString: Enemy
@@ -107,7 +107,7 @@ Transform:
   m_GameObject: {fileID: 8482292515962624729}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.62289, y: -18.63, z: 0}
+  m_LocalPosition: {x: -9.609, y: -18.63, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -169,7 +169,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &9139967244966950911
+--- !u!114 &7677963455301352269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8482292515962624729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57b382d76612fde4db62bfcb35ebed39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patrolDistance: 3
+  speed: 2
+  jumpForce: 10
+  jumpInterval: 5
+  knockbackStrength: 5
+--- !u!50 &3734036315246324324
 Rigidbody2D:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -196,24 +213,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 5
---- !u!114 &7677963455301352269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8482292515962624729}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57b382d76612fde4db62bfcb35ebed39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  patrolDistance: 3
-  speed: 2
-  jumpForce: 10
-  jumpInterval: 5
-  knockbackStrength: 5
---- !u!58 &8953361252570886375
+--- !u!58 &8170093829001122910
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
