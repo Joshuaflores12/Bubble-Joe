@@ -249,40 +249,12 @@ public class PlayerColl : MonoBehaviour
         }
     }
 
-    public void SetShieldToFraction(float fraction)
-    {
-        shieldTimeRemaining = Mathf.Clamp(shieldDuration * fraction, 0f, shieldDuration);
-        isShieldActive = true;
-
-        if (forcefield != null)
-            forcefield.SetActive(true);
-
-        if (shieldBar != null)
-        {
-            shieldBar.SetMaxTime(shieldDuration);
-            shieldBar.SetTime(shieldTimeRemaining);
-        }
-
-        isCountdownActive = false;
-        hasFlashed = false;
-
-        if (countdownCanvas != null)
-            countdownCanvas.alpha = 0f;
-
-        shieldDrainDelayTimer = shieldDrainDelay;
-        ShieldDrain = true;
-
-        Debug.Log($"Shield set to {fraction * 100}% and activated!");
-    }
-    
-
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (!col.gameObject.CompareTag("Enemy"))
             return;
 
-        // 1) Subtract one life
-        HealthManagerLivesSystem.health--;
+        
 
         // 2) Apply knock-back impulse
         var rb = GetComponent<Rigidbody2D>();
