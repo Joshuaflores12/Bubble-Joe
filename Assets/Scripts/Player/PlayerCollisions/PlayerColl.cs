@@ -79,6 +79,7 @@ public class PlayerColl : MonoBehaviour
 
         if (isShieldActive && isOnCheckpoint)
         {
+
           SetShieldToFraction(0.5f); 
         }
         // As long as there is a shield, it will drain over time after a delay
