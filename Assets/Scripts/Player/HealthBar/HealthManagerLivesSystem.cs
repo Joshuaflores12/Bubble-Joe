@@ -59,6 +59,6 @@ public class HealthManagerLivesSystem : MonoBehaviour
     private void UpdateLivesUI()
     {
         if (Lives != null)
-            Lives.text =  lives.ToString();
+            Lives.text = lives + "x";
     }
 }
