@@ -172,7 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: -9022803459307738961}
   movementSpeed: 5
-  jumpForce: 300
+  jumpForce: 400
   movement: {x: 0, y: 0}
   isGrounded: 0
   jumpDamage: 10
