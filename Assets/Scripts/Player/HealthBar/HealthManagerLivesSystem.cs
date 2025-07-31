@@ -7,7 +7,7 @@ public class HealthManagerLivesSystem : MonoBehaviour
     public static int health = 3; // Hearts per life
     public static int lives = 3;  // Total lives
 
-    [SerializeField] private Image[] hearts;
+    [SerializeField] public Image[] hearts;
     [SerializeField] private Sprite fullHeart;
     [SerializeField] private Sprite emptyHeart;
     [SerializeField] private TMP_Text Lives; 

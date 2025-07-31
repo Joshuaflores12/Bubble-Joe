@@ -40,6 +40,9 @@ public class PlayerColl : MonoBehaviour
     private float shieldDrainDelayTimer = 0f;
     private bool ShieldDrain = false;
 
+    private HealthManagerLivesSystem healthManager;
+    private int maxHealth;
+
     void Start()
     {
         // Locate ShieldBar by tag
@@ -65,12 +68,23 @@ public class PlayerColl : MonoBehaviour
             Debug.LogWarning("Timer UI (TMP_Text) not found! Make sure it's tagged as 'Timer'");
         }
 
+        // Cache health manager and max health
+        healthManager = FindFirstObjectByType<HealthManagerLivesSystem>();
+        if (healthManager != null)
+            maxHealth = healthManager.hearts.Length;
+
         countdownRemaining = countdownDuration;
         ActivateShield(true); // Start with shield
     }
 
     void Update()
     {
+        // Reset health to max when on checkpoint
+        if (isOnCheckpoint && HealthManagerLivesSystem.health < maxHealth)
+        {
+            HealthManagerLivesSystem.health = maxHealth;
+        }
+
         // If shield is not active and player is on checkpoint, recharge it to half
         if (!isShieldActive && isOnCheckpoint)
         {
