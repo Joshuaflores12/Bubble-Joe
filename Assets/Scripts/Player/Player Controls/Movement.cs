@@ -3,6 +3,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
      [SerializeField]  Rigidbody2D rb;
+
      [SerializeField]  float movementSpeed;
      [SerializeField]  float jumpForce;
      [SerializeField]  Vector2 movement;
@@ -13,6 +14,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
     }
 
     void Update()
@@ -21,6 +23,7 @@ public class Movement : MonoBehaviour
         {
             isGrounded = false;
             rb.AddForce(Vector2.up * jumpForce);
+
             Debug.Log("JUMPED!!!");
         }
     }
@@ -33,7 +36,6 @@ public class Movement : MonoBehaviour
         float Xmovement = Input.GetAxis("Horizontal");
 
         movement = new Vector2 (Xmovement, 0);
-
         if (goLeft && goRight)
         {
             Xmovement = 0f; 
